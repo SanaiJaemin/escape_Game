@@ -20,7 +20,7 @@
 
 # 레퍼런스
 
-개리모드 탈출맵<https://www.youtube.com/watch?v=4YcRZsjegjQ>
+(개리모드 탈출맵)<https://www.youtube.com/watch?v=4YcRZsjegjQ>
 
 # 시스템
 ## 캐릭터
