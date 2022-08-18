@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class PlayerAnimatorController : MonoBehaviour
 {
-    private Animator animator;
-
-    public float moveSpeed;
-    private void Awake()
-    {
-        animator = GetComponentInChildren<Animator>();
-    }
+    
+   
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,15 +18,8 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         
     }
-    public float MoveSpeed
-    {
-        set => animator.SetFloat("movementSpeed", value);
-        get => animator.GetFloat("movementSpeed");
-    }
+    
 
-    public void Play(string statename, int layer, float normalizedTime)
-    {
-        animator.Play(statename, layer, normalizedTime);
-    }
+    
 
 }

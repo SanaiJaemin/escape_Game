@@ -10,7 +10,7 @@ public class BulletMove : MonoBehaviour
     void Start()
     {
 
-        Destroy(gameObject,1f);
+        
     }
 
     // Update is called once per frame
@@ -19,4 +19,11 @@ public class BulletMove : MonoBehaviour
         transform.Translate(0f, 0f, bulletSpeed * Time.deltaTime);
 
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        
+    }
+
+
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - JumpZone
   - Ground
+  - Item
   layers:
   - Default
   - TransparentFX

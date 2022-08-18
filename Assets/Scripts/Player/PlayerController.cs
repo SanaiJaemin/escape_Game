@@ -20,10 +20,8 @@ public class PlayerController : MonoBehaviour
     private AudioClip _audioClipRun;
 
     private PlayerCamera _playerCamera;
-    private PlayerStatus _playerStatus;
    private PlayerMove _playerMove;
-    private PlayerAnimatorController animator;
-    private WeaponAssualtRifle weapon;
+ 
     
     
     private AudioSource _audioSource;
@@ -37,10 +35,8 @@ public class PlayerController : MonoBehaviour
 
         _playerCamera = GetComponent<PlayerCamera>();
         _playerMove = GetComponent<PlayerMove>();
-        _playerStatus = GetComponent<PlayerStatus>();
-        animator = GetComponent<PlayerAnimatorController>();
         _audioSource = GetComponent<AudioSource>();
-        weapon = GetComponentInChildren<WeaponAssualtRifle>();
+      
         
     }
     // Start is called before the first frame update
@@ -55,7 +51,7 @@ public class PlayerController : MonoBehaviour
         UpdateRotate();
         UpdateMove();
         UpdateJump();
-        UpdateShot();
+       
     }
 
     private void UpdateRotate()
@@ -70,34 +66,6 @@ public class PlayerController : MonoBehaviour
         float MoveX = Input.GetAxis("Horizontal");
         float MoveZ = Input.GetAxis("Vertical");
 
-        if (MoveX != 0 || MoveZ != 0)
-        {
-            bool isRun = false;
-
-            if (MoveZ > 0)
-            {
-                isRun = Input.GetKey(KeyCodeRun);
-            }
-            _playerMove.MoveSpeed = isRun == true ? _playerStatus.RunSpeed : _playerStatus.WalkSpeed;
-            animator.MoveSpeed = isRun == true ? 1 : 0.5f;
-            _audioSource.clip = isRun == true ? _audioClipWalk : _audioClipRun; 
-        
-            if(_audioSource.isPlaying == false)
-            {
-                _audioSource.loop = true;
-                _audioSource.Play();
-            }
-        
-        }
-        else
-        {
-            _playerMove.MoveSpeed = 0;
-            animator.MoveSpeed = 0f;
-            if(_audioSource.isPlaying == true)
-            {
-                _audioSource.Stop();
-            }
-        }
         _playerMove.Moveto(new Vector3(MoveX, 0, MoveZ));
     }
     private void UpdateJump()
@@ -108,16 +76,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UpdateShot()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            weapon.StartWeaponAction();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            weapon.StopWeaponAction();
-        }
-    }
+ 
 
 }
