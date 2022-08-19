@@ -6,8 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 
     [Header("Input KeyCodes")]
-
-    private KeyCode KeyCodeRun = KeyCode.LeftShift;
+ 
     private KeyCode KeyCodeJump = KeyCode.Space;
 
     [Header("Audio Clips")]
@@ -21,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
     private PlayerCamera _playerCamera;
    private PlayerMove _playerMove;
+    private PlayerCatch _playerCatch;
+    public bool isCatch = false;
+
  
     
     
@@ -36,8 +38,10 @@ public class PlayerController : MonoBehaviour
         _playerCamera = GetComponent<PlayerCamera>();
         _playerMove = GetComponent<PlayerMove>();
         _audioSource = GetComponent<AudioSource>();
-      
-        
+        _playerCatch = GetComponent<PlayerCatch>();
+
+
+
     }
     // Start is called before the first frame update
     void Start()
@@ -51,7 +55,9 @@ public class PlayerController : MonoBehaviour
         UpdateRotate();
         UpdateMove();
         UpdateJump();
-       
+        UpdateCatch();
+
+
     }
 
     private void UpdateRotate()
@@ -74,6 +80,14 @@ public class PlayerController : MonoBehaviour
         {
             _playerMove.Jump();
         }
+    }
+
+    private void UpdateCatch()
+    {
+        isCatch = Input.GetKeyDown(KeyCode.E);
+        
+            
+        
     }
 
  

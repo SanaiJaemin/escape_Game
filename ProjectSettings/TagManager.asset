@@ -7,6 +7,8 @@ TagManager:
   - JumpZone
   - Ground
   - Item
+  - Player Camera
+  - WorldObject
   layers:
   - Default
   - TransparentFX
