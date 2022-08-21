@@ -7,23 +7,20 @@ public class PlayerCatch : MonoBehaviour
     // Start is called before the first frame update
 
     Rigidbody _rigidbody;
-    GameObject GetObject;
+   public GameObject GetObject;
+   public GameObject prevObject;
     public GameObject WorldObject;
+
     bool catching = false;
-    private float distance = 1f;
+    private float distance = 3f;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         GetObject = GetComponent<GameObject>();
         WorldObject = GetComponent<GameObject>();
+        prevObject = GetComponent<GameObject>();
     }
     // Update is called once per frame
-    void Update()
-    {
-       
-
-    }
-
     private void FixedUpdate()
     {
         UpdateInput(); // 키입력
@@ -34,13 +31,13 @@ public class PlayerCatch : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log($"{catching}");
+            
             catching = !catching;
             
             if (catching)
             {
                 raycasting();
-                OnCatch();
+               
 
             }
             else
@@ -49,9 +46,7 @@ public class PlayerCatch : MonoBehaviour
                 OffCatch();
             }
 
-           
-
-
+            Debug.Log($"{catching}");
         }
     }
 
@@ -65,24 +60,29 @@ public class PlayerCatch : MonoBehaviour
         {
             Debug.Log(hit.transform.gameObject);
             MeshRenderer meshRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
-            GetObject = hit.transform.gameObject;
+            GetObject = hit.transform.gameObject; //히트된 오브젝트 받아옴
+            GetObject.transform.parent = gameObject.transform; //카메라 하위로 들어감
+            WorldObject.transform.position = GetObject.transform.position; //히트된오브젝트 포지션을 바깥에 저장할오브젝트 포지션에 저장
+            GetObject.GetComponent<Rigidbody>().useGravity = false;
+            GetObject.GetComponent<Rigidbody>().isKinematic = true;
 
-            
         }
 
 
     }
     
 
-    void OnCatch()
-    {
-        GetObject.transform.parent = gameObject.transform; //카메라 하위로 집어넣음
-    }
+   
+   //카메라 하위로 집어넣음 Getobject는 큐브  game은 카메라 World는 좌표저장 문제점 월드도 카메라로 같이들어가버림
+    
 
-    void OffCatch()
+    void OffCatch()// 안잡을때
     {
-        WorldObject.transform.position = GetObject.transform.position; //월드 옵젝좌표로 집어넣음
-        GetObject.transform.parent = gameObject.transform; // 
+         //월드 옵젝좌표로 집어넣음
+        GetObject.transform.parent = WorldObject.transform;// 큐브를 월드하위로 집어넣음 물건 놓기
+        GetObject.GetComponent<Rigidbody>().useGravity = true;
+        GetObject.GetComponent<Rigidbody>().isKinematic = false;
+        WorldObject.transform.DetachChildren();
     }
 
     private void OnTriggerEnter(Collider other)
