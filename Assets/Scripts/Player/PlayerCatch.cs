@@ -63,7 +63,7 @@ public class PlayerCatch : MonoBehaviour
             GetObject = hit.transform.gameObject; //히트된 오브젝트 받아옴
             GetObject.transform.parent = gameObject.transform; //카메라 하위로 들어감
             WorldObject.transform.position = GetObject.transform.position; //히트된오브젝트 포지션을 바깥에 저장할오브젝트 포지션에 저장
-            GetObject.GetComponent<Rigidbody>().useGravity = false;
+            GetObject.GetComponent<Rigidbody>().useGravity = false; 
             GetObject.GetComponent<Rigidbody>().isKinematic = true;
 
         }
