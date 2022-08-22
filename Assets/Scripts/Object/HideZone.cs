@@ -25,7 +25,7 @@ public class HideZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       if(other.CompareTag("Item"))
+       if(other.CompareTag("Player"))
         {
             DoorClose = true;
         }
@@ -34,9 +34,9 @@ public class HideZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Item"))
-        {
-            DoorClose = false;
-        }
+        //if (other.CompareTag("Player"))
+        //{
+        //    DoorClose = false;
+        //}
     }
 }

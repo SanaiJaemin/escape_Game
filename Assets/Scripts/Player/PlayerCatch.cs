@@ -10,6 +10,7 @@ public class PlayerCatch : MonoBehaviour
     public GameObject GetObject;
     
     public GameObject WorldObject;
+    public Material _material;
 
     bool catching = false;
     private float distance = 3f;
@@ -18,7 +19,9 @@ public class PlayerCatch : MonoBehaviour
         
          GetObject = GetComponent<GameObject>();
         WorldObject = GetComponent<GameObject>();
-        
+        _material = GetComponent<Material>();
+
+
     }
     // Update is called once per frame
     private void FixedUpdate()
@@ -68,6 +71,13 @@ public class PlayerCatch : MonoBehaviour
             }
 
        
+            if(hit.collider.CompareTag("VisibleDoorOpenSwich"))
+            {
+                hit.transform.GetComponent<HideZoneSwich>().SwichOn = true;
+
+                
+            }
+
 
             if (hit.rigidbody == true)
             { 
