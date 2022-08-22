@@ -6,19 +6,19 @@ public class PlayerCatch : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    Rigidbody _rigidbody;
-   public GameObject GetObject;
-   public GameObject prevObject;
+    
+    public GameObject GetObject;
+    
     public GameObject WorldObject;
 
     bool catching = false;
     private float distance = 3f;
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        GetObject = GetComponent<GameObject>();
+        
+         GetObject = GetComponent<GameObject>();
         WorldObject = GetComponent<GameObject>();
-        prevObject = GetComponent<GameObject>();
+        
     }
     // Update is called once per frame
     private void FixedUpdate()
@@ -36,7 +36,7 @@ public class PlayerCatch : MonoBehaviour
             
             if (catching)
             {
-                raycasting();
+                Catchraycasting();
                
 
             }
@@ -46,11 +46,12 @@ public class PlayerCatch : MonoBehaviour
                 OffCatch();
             }
 
-            Debug.Log($"{catching}");
+            
         }
+       
     }
 
-    void raycasting()
+    void Catchraycasting()
     {
         
         RaycastHit hit;
@@ -60,11 +61,27 @@ public class PlayerCatch : MonoBehaviour
         {
             Debug.Log(hit.transform.gameObject);
             MeshRenderer meshRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
-            GetObject = hit.transform.gameObject; //히트된 오브젝트 받아옴
+            
+            if(hit.transform.gameObject == null)
+            {
+                return;
+            }
+
+       
+
+            if (hit.rigidbody == true)
+            { 
+                GetObject = hit.transform.gameObject; //히트된 오브젝트 받아옴
             GetObject.transform.parent = gameObject.transform; //카메라 하위로 들어감
             WorldObject.transform.position = GetObject.transform.position; //히트된오브젝트 포지션을 바깥에 저장할오브젝트 포지션에 저장
-            GetObject.GetComponent<Rigidbody>().useGravity = false; 
+
+             
+            
+            GetObject.GetComponent<Rigidbody>().useGravity = false;
             GetObject.GetComponent<Rigidbody>().isKinematic = true;
+
+            }
+            
 
         }
 

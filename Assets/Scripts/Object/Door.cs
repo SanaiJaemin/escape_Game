@@ -76,9 +76,7 @@ public class Door : MonoBehaviour
 
     IEnumerator DoorOpen()
     {
-        
-
-
+     
         yield return new WaitForSeconds(0.5f);
         Wall.GetComponent<BoxCollider>().isTrigger = true;
 
@@ -87,9 +85,10 @@ public class Door : MonoBehaviour
     IEnumerator DoorClose()
     {
        
-
         yield return new WaitForSeconds(0.5f);
         Wall.GetComponent<BoxCollider>().isTrigger = false;
+
+
     }
 
 }
