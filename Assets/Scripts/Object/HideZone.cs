@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class HideZone : MonoBehaviour
 {
-   
-    
+
+    AudioClip VisibleDoorSound;
+    AudioSource _audioSource;
     
    public bool DoorClose = false;
-   
-    
 
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,7 @@ public class HideZone : MonoBehaviour
     {
        if(other.CompareTag("Player"))
         {
+            _audioSource.PlayOneShot(VisibleDoorSound);
             DoorClose = true;
         }
     }

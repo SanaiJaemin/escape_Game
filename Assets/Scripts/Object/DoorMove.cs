@@ -8,19 +8,16 @@ public class DoorMove : MonoBehaviour
 
 
     public Door _door;
-    public AudioClip DoorSound;
 
     Vector3 EndPos;
     Vector3 StartPos;
  
 
     private NavMeshObstacle _navMeshObstacle;
-    private AudioSource _audioSource;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
         _navMeshObstacle = GetComponent<NavMeshObstacle>();
         StartPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         EndPos = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);

@@ -6,11 +6,12 @@ public class HideZoneSwich : MonoBehaviour
 {
     // Start is called before the first frame update
     public bool SwichOn = false;
-  
+    public AudioClip VisibleDoorSound;
+    AudioSource _audioSource;
     private Renderer _renderer;
     private void Awake()
     {
-        
+        _audioSource = GetComponent<AudioSource>();
         _renderer = GetComponent<Renderer>();
     }
     void Start()
@@ -28,6 +29,14 @@ public class HideZoneSwich : MonoBehaviour
         else
         {
             _renderer.material.color = Color.green;
+        }
+    }
+
+    private void OnEnable()
+    {
+        if(SwichOn)
+        {
+            _audioSource.PlayOneShot(VisibleDoorSound);
         }
     }
 }

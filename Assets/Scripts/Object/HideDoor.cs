@@ -34,7 +34,7 @@ public class HideDoor : MonoBehaviour
             FullTime += Time.deltaTime;
         if (_hideZone.DoorClose && Startarrival)// 플레이어 오면 문닫음
         {
-            _audioSource.PlayOneShot(DoorSuound);
+            
             if(FullTime > 1f)
             {
                 FullTime = 0f;
@@ -50,7 +50,7 @@ public class HideDoor : MonoBehaviour
          
         if (_hideZoneSwich.SwichOn && Closearrival) // 스위치키면 문열림
         {
-            _audioSource.PlayOneShot(DoorSuound);
+            
             if (FullTime > 1f)
             {
                 FullTime = 0f;
