@@ -10,7 +10,7 @@ public class PlayerCatch : MonoBehaviour
     public GameObject GetObject;
     
     public GameObject WorldObject;
-    public Material _material;
+  
 
     bool catching = false;
     private float distance = 3f;
@@ -19,7 +19,7 @@ public class PlayerCatch : MonoBehaviour
         
          GetObject = GetComponent<GameObject>();
         WorldObject = GetComponent<GameObject>();
-        _material = GetComponent<Material>();
+        
 
 
     }
@@ -34,20 +34,18 @@ public class PlayerCatch : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            
-            catching = !catching;
-            
-            if (catching)
-            {
-                Catchraycasting();
+              Catchraycasting();
                
 
-            }
-            else
+         
+         
+           
+            if(catching)
             {
-
                 OffCatch();
+
             }
+            
 
             
         }
@@ -85,7 +83,7 @@ public class PlayerCatch : MonoBehaviour
             GetObject.transform.parent = gameObject.transform; //카메라 하위로 들어감
             WorldObject.transform.position = GetObject.transform.position; //히트된오브젝트 포지션을 바깥에 저장할오브젝트 포지션에 저장
 
-             
+                catching = true;
             
             GetObject.GetComponent<Rigidbody>().useGravity = false;
             GetObject.GetComponent<Rigidbody>().isKinematic = true;
