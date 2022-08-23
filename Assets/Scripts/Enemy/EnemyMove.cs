@@ -6,8 +6,10 @@ using UnityEngine.AI;
 public class EnemyMove : MonoBehaviour
 {
     NavMeshAgent nav;
-    public Transform playerPos;
+    public Transform target;
     float TotalTime;
+    public float life = 10.0f;
+
     float range = 10;
     Vector3 point;
     // Start is called before the first frame update
@@ -19,18 +21,15 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TotalTime += Time.deltaTime;
-
-        if(TotalTime > 10f)
+        Vector3 point;
+        if (RandomPoint(transform.position, range, out point))
         {
-            TotalTime = 0;
+            Debug.DrawRay(point, Vector3.up, Color.blue, life);
 
-            if(RandomPoint(playerPos.position, range,out point))
-            {
-                playerPos.position = point;
-            }
         }
-        nav.SetDestination(playerPos.position);
+        
+
+
     }
 
     bool RandomPoint(Vector3 center,float range,out Vector3 result)
