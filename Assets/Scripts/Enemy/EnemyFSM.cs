@@ -7,8 +7,10 @@ public class EnemyFSM : MonoBehaviour
 {
     private Animator _animator;
     public Transform RandomPos;
-    public Transform Player;
-    
+    public Transform prevPos;
+
+    bool isTarget = false;
+
     LayerMask PlayLayer;
     NavMeshAgent _navMeshAgent;
 
@@ -21,48 +23,61 @@ public class EnemyFSM : MonoBehaviour
         Attack
     }
 
-   
+
     public State currentState = State.Idle;
-    // Start is called before the first frame update
+
     private void Awake()
     {
+        prevPos = GetComponent<Transform>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        
         _animator = GetComponent<Animator>();
     }
     void Start()
     {
-        
+
         PlayLayer = LayerMask.NameToLayer("Player");
-        
+
     }
 
     private void OnEnable()
     {
- 
-            Debug.Log("¿€µøµ 123");
-            StartCoroutine(RandomTarget());
+
+        Debug.Log("¿€µøµ 123");
+        StartCoroutine(RandomTarget());
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        int  layerMask = (1 << PlayLayer);
+        int layerMask = (1 << PlayLayer);
 
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, 5f, layerMask); // ≈∏ƒœ¡ˆ¡§«ÿ¡÷¥¬∞Õ
-        foreach(Collider col in colliders)
+        foreach (Collider col in colliders)
         {
-            if(col.name == "Enemy")
+            if (col.name == "Enemy")
             {
                 continue;
             }
             Debug.Log("≈∏ƒœ√£¿Ω");
-            RandomPos = col.transform;
-            
-            _navMeshAgent.SetDestination(RandomPos.position); 
-            StopAllCoroutines(); //∑£¥˝¡¬«• ƒ⁄∑Á∆æ∏ÿ√„
+            isTarget = true;
+
+            RandomPos = col.transform; //
         }
 
-        
+        if (isTarget)
+        {
+            _navMeshAgent.SetDestination(RandomPos.position);
+
+        }
+        float SensingRange = Vector3.Distance(transform.position, RandomPos.position);
+        if (SensingRange > 5f) // π¸¿ß∞° ƒøπˆ∏Æ∏È
+        {
+            Debug.Log("¿€µøµ ?");
+            isTarget = false;
+            
+
+        }
+
+
 
         //switch (currentState)
         //{
@@ -100,8 +115,8 @@ public class EnemyFSM : MonoBehaviour
     //    Vector3 MoveVec = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     //    Vector3 dir = target.transform.position - transform.position;
     //        dir.Normalize();
-        
-        
+
+
     //    _animator.SetBool("Run", MoveVec != Vector3.zero);
     //    transform.LookAt(target.transform);
     //    float distance = Vector3.Distance(transform.position, target.transform.position);
@@ -117,35 +132,35 @@ public class EnemyFSM : MonoBehaviour
     //{
     //        _animator.SetTrigger("Attack");
     //    currentTime += Time.deltaTime;
-        
+
     //    if(currentTime > attackTime)
     //    {
     //        currentTime = 0f;
 
-            
+
     //        float distance = Vector3.Distance(transform.position, target.transform.position);
 
     //        if(distance >= attackDistance)
     //        {
-                
+
     //            currentState = State.Walk;
     //        }
     //    }
     //}
 
-   bool RandomPoint(Vector3 center, float range, out Vector3 result)
+    bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
         for (int i = 0; i < 30; i++)
         {
             Vector3 randomPoint = center + Random.insideUnitSphere * range;
             NavMeshHit hit;
-            if(NavMesh.SamplePosition(randomPoint,out hit,1.0f,NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
             {
                 result = hit.position;
                 return true;
 
             }
-            
+
         }
         result = Vector3.zero;
         return false;
@@ -153,19 +168,23 @@ public class EnemyFSM : MonoBehaviour
 
     IEnumerator RandomTarget()
     {
-        
 
-        while(true)
+        while (true)
         {
+            
 
-            if(RandomPoint(RandomPos.position,range,out point))
-            {
-                RandomPos.position = point;
-            }
-            _navMeshAgent.SetDestination(RandomPos.position);
-            yield return new WaitForSeconds(5f);
+                if (RandomPoint(RandomPos.position, range, out point))
+                {
+                    RandomPos.position = point;
+                    
+                }
+                Debug.DrawRay(RandomPos.position, Vector3.up, Color.blue, 6f);
+                _navMeshAgent.SetDestination(RandomPos.position);
+                yield return new WaitForSeconds(3f);
 
-            yield return null;
+                yield return null;
+           
+
         }
     }
 

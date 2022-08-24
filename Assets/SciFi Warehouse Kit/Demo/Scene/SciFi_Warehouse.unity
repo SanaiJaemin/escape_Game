@@ -2471,8 +2471,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0dd75f9f0b01f948a650d8285c4a952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  Player: {fileID: 0}
+  RandomPos: {fileID: 0}
+  prevPos: {fileID: 0}
   currentState: 0
 --- !u!195 &141797179
 NavMeshAgent:
@@ -30691,7 +30691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1827629865255638474, guid: 2b95b8c937251bf4a862469a23da16b2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1827629865255638474, guid: 2b95b8c937251bf4a862469a23da16b2, type: 3}
       propertyPath: m_TagString
