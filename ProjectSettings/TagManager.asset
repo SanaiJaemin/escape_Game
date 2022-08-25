@@ -11,6 +11,7 @@ TagManager:
   - WorldObject
   - VisibleDoorOpenSwich
   - Enemy
+  - RandomPos
   layers:
   - Default
   - TransparentFX
