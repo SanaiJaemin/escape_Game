@@ -6,49 +6,49 @@ using UnityEngine.AI;
 public class EnemyFSM : MonoBehaviour
 {
     private Animator _animator;
-    public Transform RandomPos;
-    public Transform prevPos;
+    public Transform TargetPos;
 
-    bool isTarget = false;
 
+    public GameObject Randomobject;
+    bool isTargetPlayer = false;
+
+
+    float randomPositionScend = 5f;
+    float Delay;
     LayerMask PlayLayer;
     NavMeshAgent _navMeshAgent;
 
     float range = 10f;
     Vector3 point;
-    public enum State
-    {
-        Idle,
-        Walk,
-        Attack
-    }
+    Vector3 Movevec;
 
-
-    public State currentState = State.Idle;
 
     private void Awake()
     {
-        prevPos = GetComponent<Transform>();
+
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
     }
     void Start()
     {
-
         PlayLayer = LayerMask.NameToLayer("Player");
 
     }
 
-    private void OnEnable()
-    {
 
-        Debug.Log("작동됨123");
-        StartCoroutine(RandomTarget());
-    }
     // Update is called once per frame
     void FixedUpdate()
     {
         int layerMask = (1 << PlayLayer);
+
+        RandomTarget(); // 랜덤타겟 패트롤
+
+
+        Vector3 Movevec = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        _animator.SetBool("Run", Movevec != Vector3.zero);
+        transform.LookAt(TargetPos);
+        
+       
 
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, 5f, layerMask); // 타켓지정해주는것
         foreach (Collider col in colliders)
@@ -58,89 +58,48 @@ public class EnemyFSM : MonoBehaviour
                 continue;
             }
             Debug.Log("타켓찾음");
-            isTarget = true;
-
-            RandomPos = col.transform; //
+            isTargetPlayer = true;
+            TargetPos = col.transform;
+            break;
         }
 
-        if (isTarget)
+        if (isTargetPlayer)
         {
-            _navMeshAgent.SetDestination(RandomPos.position);
+            float SensingRange = Vector3.Distance(transform.position, TargetPos.position);
+           
+            _navMeshAgent.SetDestination(TargetPos.position);
 
+            if (SensingRange > 2f)
+            {
+
+            }
+
+            // 플레이어 와 몬스터 거리가 공격범위가 5 이상이면 추격중지 하고 랜덤오브젝트 좌표로 타겟포지션 지정
+            if (SensingRange > 5f)
+            {
+                TargetPos = Randomobject.transform;
+                _navMeshAgent.SetDestination(TargetPos.position);
+                isTargetPlayer = false;
+
+            }
         }
-        float SensingRange = Vector3.Distance(transform.position, RandomPos.position);
-        if (SensingRange > 5f) // 범위가 커버리면
-        {
-            Debug.Log("작동됨?");
-            isTarget = false;
-            
 
-        }
-
-
-
-        //switch (currentState)
-        //{
-        //    case State.Idle:
-        //        Idle();
-        //        break;
-        //    case State.Walk:
-        //        Walk();
-        //        break;
-        //    case State.Attack:
-        //        Attack();
-        //        break;
-
-
-        //}
     }
 
-    //public float FindDistance = 5f;
-    //private void Idle()
-    //{
 
-    //        float Distance = Vector3.Distance(transform.position, target.transform.position);
-    //        if (Distance < FindDistance)
-    //        {
-
-    //            currentState = State.Walk;
-
-    //        } 
-    //}
-
-    //public float Speed = 2f;
-    //public float attackDistance = 1.5f;
-    //private void Walk()
-    //{
-    //    Vector3 MoveVec = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-    //    Vector3 dir = target.transform.position - transform.position;
-    //        dir.Normalize();
-
-
-    //    _animator.SetBool("Run", MoveVec != Vector3.zero);
-    //    transform.LookAt(target.transform);
-    //    float distance = Vector3.Distance(transform.position, target.transform.position);
-    //    if (distance < attackDistance)
-    //    {
-    //        currentState = State.Attack;
-    //    }
-
-    //}
-    //float currentTime;
+    public float Speed = 2f;
+    public float attackDistance = 1.5f;
     //float attackTime = 1f;
     //private void Attack()
     //{
-    //        _animator.SetTrigger("Attack");
-    //    currentTime += Time.deltaTime;
+    //    _animator.SetTrigger("Attack");
+    //    Delay += Time.deltaTime;
 
-    //    if(currentTime > attackTime)
+    //    if (Delay > attackTime)
     //    {
-    //        currentTime = 0f;
+    //        Delay = 0f;
 
-
-    //        float distance = Vector3.Distance(transform.position, target.transform.position);
-
-    //        if(distance >= attackDistance)
+    //        if (Delay >= attackDistance)
     //        {
 
     //            currentState = State.Walk;
@@ -166,25 +125,38 @@ public class EnemyFSM : MonoBehaviour
         return false;
     }
 
-    IEnumerator RandomTarget()
+    public void RandomTarget()
     {
-
-        while (true)
+        Debug.Log($"{isTargetPlayer}");
+        if (isTargetPlayer)
         {
+            return;
+        }
+        Delay += Time.deltaTime;
+        if (Delay > randomPositionScend)
+        {
+          
+            Delay = 0f;
+            if (RandomPoint(TargetPos.position, range, out point)) //랜덤 포지션
+            {
+                TargetPos.position = point;
+
+
+            }
+            Debug.DrawRay(TargetPos.position, Vector3.up, Color.blue, 6f);
             
-
-                if (RandomPoint(RandomPos.position, range, out point))
-                {
-                    RandomPos.position = point;
-                    
-                }
-                Debug.DrawRay(RandomPos.position, Vector3.up, Color.blue, 6f);
-                _navMeshAgent.SetDestination(RandomPos.position);
-                yield return new WaitForSeconds(3f);
-
-                yield return null;
+            _navMeshAgent.SetDestination(TargetPos.position); // 타겟따라가게하기
            
+        }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+       if(other.CompareTag("RandomPos"))
+        {
+            _animator.SetTrigger("Idle");
+            Debug.Log("발동됨");
         }
     }
 

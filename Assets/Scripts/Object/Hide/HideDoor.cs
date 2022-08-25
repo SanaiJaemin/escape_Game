@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HideDoor : MonoBehaviour
 {
-    public HideInplayer _hideInPlayer;
+    
    public HideZone _hideZone;
     public HideZoneSwich _hideZoneSwich;
     Vector3 ClosePosition;
@@ -32,7 +32,7 @@ public class HideDoor : MonoBehaviour
     private void FixedUpdate()
     {
             FullTime += Time.deltaTime;
-        if (_hideZone.DoorClose && Startarrival && _hideInPlayer.InPlayer)// 플레이어 오면 문닫음
+        if (_hideZone.DoorClose && Startarrival)// 플레이어 오면 문닫음
         {
             
             if(FullTime > 1f)
@@ -57,7 +57,7 @@ public class HideDoor : MonoBehaviour
             }
             transform.position = Vector3.Lerp(transform.position, StartPosition, Time.deltaTime * 2f);
                 _hideZone.DoorClose = false;
-            _hideInPlayer.InPlayer = false;
+            
             if(transform.position == StartPosition)
             {
                 Startarrival = true;

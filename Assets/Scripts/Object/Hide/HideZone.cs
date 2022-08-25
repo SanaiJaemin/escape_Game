@@ -33,6 +33,7 @@ public class HideZone : MonoBehaviour
         {
             _audioSource.PlayOneShot(VisibleDoorSound);
             DoorClose = true;
+            Debug.Log("¿€µøµ ");
         }
     }
 
