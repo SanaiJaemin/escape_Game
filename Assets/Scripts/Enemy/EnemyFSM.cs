@@ -10,7 +10,8 @@ public class EnemyFSM : MonoBehaviour
 
 
     public GameObject Randomobject;
-    bool isTargetPlayer = false;
+    public bool isTargetPlayer = false;
+    public float PlayerTargetRange = 5f;
 
 
     float randomPositionScend = 5f;
@@ -50,7 +51,7 @@ public class EnemyFSM : MonoBehaviour
         
        
 
-        Collider[] colliders = Physics.OverlapSphere(this.transform.position, 5f, layerMask); // 타켓지정해주는것
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, PlayerTargetRange, layerMask); // 타켓지정해주는것
         foreach (Collider col in colliders)
         {
             if (col.name == "Enemy")
@@ -75,7 +76,7 @@ public class EnemyFSM : MonoBehaviour
             }
 
             // 플레이어 와 몬스터 거리가 공격범위가 5 이상이면 추격중지 하고 랜덤오브젝트 좌표로 타겟포지션 지정
-            if (SensingRange > 5f)
+            if (SensingRange > PlayerTargetRange)
             {
                 TargetPos = Randomobject.transform;
                 _navMeshAgent.SetDestination(TargetPos.position);
@@ -84,6 +85,8 @@ public class EnemyFSM : MonoBehaviour
             }
         }
 
+
+        Debug.Log($"{PlayerTargetRange}");
     }
 
 

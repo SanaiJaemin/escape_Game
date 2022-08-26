@@ -5,13 +5,14 @@ using UnityEngine;
 public class HideDoor : MonoBehaviour
 {
     
-   public HideZone _hideZone;
+    public HideZone _hideZone;
     public HideZoneSwich _hideZoneSwich;
+    public HideDoorEnter _hideDoorEnter;
     Vector3 ClosePosition;
     Vector3 StartPosition;
     float FullTime;
     private bool Closearrival = false;
-    private bool Startarrival = true;
+    public bool Startarrival = true;
 
    public AudioClip DoorSuound;
    private AudioSource _audioSource;
@@ -32,7 +33,7 @@ public class HideDoor : MonoBehaviour
     private void FixedUpdate()
     {
             FullTime += Time.deltaTime;
-        if (_hideZone.DoorClose && Startarrival)// 플레이어 오면 문닫음
+        if (_hideZone.DoorClose && Startarrival && _hideDoorEnter.PlayerIn)// 플레이어 오면 문닫음
         {
             
             if(FullTime > 1f)
@@ -62,15 +63,10 @@ public class HideDoor : MonoBehaviour
             {
                 Startarrival = true;
                 Closearrival = false;
-
+                _hideDoorEnter.PlayerIn = false;
             }
         }
-        
-
-
-        
-        
-
+        Debug.Log($"{_hideDoorEnter.PlayerIn}");
 
     }
 

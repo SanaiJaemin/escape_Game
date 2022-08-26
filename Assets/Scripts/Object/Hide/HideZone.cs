@@ -7,6 +7,7 @@ public class HideZone : MonoBehaviour
 
     AudioClip VisibleDoorSound;
     AudioSource _audioSource;
+    public EnemyFSM _Enemyfsm;
     
    public bool DoorClose = false;
 
@@ -24,7 +25,16 @@ public class HideZone : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
+        if(DoorClose)
+        {
+            _Enemyfsm.isTargetPlayer = false;
+            _Enemyfsm.PlayerTargetRange = 1f;
+
+        }
+        else
+        {
+            _Enemyfsm.PlayerTargetRange = 5f;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

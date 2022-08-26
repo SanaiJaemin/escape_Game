@@ -12,6 +12,11 @@ TagManager:
   - VisibleDoorOpenSwich
   - Enemy
   - RandomPos
+  - Swich
+  - RedStone
+  - YellowStone
+  - BlueStone
+  - AquaMarineStone
   layers:
   - Default
   - TransparentFX

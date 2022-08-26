@@ -13,7 +13,7 @@ public class PlayerCatch : MonoBehaviour
 
     LayerMask WorldLayer;
 
-    private bool catching = false;
+    public bool catching = false;
     private float distance = 5f;
     private void Awake()
     {
@@ -84,19 +84,11 @@ public class PlayerCatch : MonoBehaviour
                 catching = true;
                 StartCoroutine(PositionUpdate());
             }
-            if (hit.collider.CompareTag("VisibleDoorOpenSwich"))
+            if (hit.collider.CompareTag("Swich"))
             {
                 hit.transform.GetComponent<HideZoneSwich>().SwichOn = true;
 
             }
-
-
-
-
-
-
-
-
 
         }
 

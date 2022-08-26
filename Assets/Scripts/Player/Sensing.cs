@@ -7,48 +7,57 @@ public class Sensing : MonoBehaviour
 {
     private float distance = 5f;
     public GameObject Sensou;
-    public GameObject button;
+   
+    public TextMeshProUGUI _textMeshProGUI;
     // Start is called before the first frame update
     void Start()
     {
+        Sensou.SetActive(false);
         
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        Raycasting();
+        
+    Raycasting();
     }
+    
 
     void Raycasting()
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position,transform.forward,out hit,distance))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, distance))
         {
-            if(hit.collider.CompareTag("Item"))
+            if (hit.collider.CompareTag("Item"))
             {
                 Sensou.SetActive(true);
+                _textMeshProGUI.text = hit.transform.name;
             }
-            else
-            {
-                Sensou.SetActive(false);
-            }
-            
-            
-            if(hit.collider.CompareTag("VisibleDoorOpenSwich"))
+
+
+
+
+            if (hit.collider.CompareTag("Swich"))
             {
                 Debug.Log("¾ÈµÊ");
-                button.SetActive(true);
+                Sensou.SetActive(true);
+                _textMeshProGUI.text = hit.transform.name;
 
             }
-            else
-            {
-                button.SetActive(false);
-            }
             
+              
             
+
+
+
+        }
+        else
+        {
+            Sensou.SetActive(false);
             
         }
+
     }
 }
