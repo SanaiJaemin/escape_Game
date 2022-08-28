@@ -21444,8 +21444,6 @@ GameObject:
   - component: {fileID: 972482956}
   - component: {fileID: 972482955}
   - component: {fileID: 972482954}
-  - component: {fileID: 972482953}
-  - component: {fileID: 972482957}
   m_Layer: 0
   m_Name: InputBlueStone
   m_TagString: Untagged
@@ -21453,19 +21451,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &972482953
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 972482951}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.03, z: 0.88}
-  m_Center: {x: -0.08, y: 1.35, z: 0.000000029802322}
 --- !u!23 &972482954
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21532,19 +21517,6 @@ Transform:
   m_Father: {fileID: 1794871282}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &972482957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 972482951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb53dc8d4e0c08459b461cc2fb7e25d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  getStone: 00000000
 --- !u!1001 &975051047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23818,7 +23790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc61ae40090090d4cb6e01d6047f0f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getStone: 00000000
+  _inputStone: {fileID: 1794871283}
 --- !u!1 &1066414316 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 387364091424724237, guid: aedebdaeae12a6743b39120d2f5156b0, type: 3}
@@ -28348,8 +28320,6 @@ GameObject:
   - component: {fileID: 1258144752}
   - component: {fileID: 1258144751}
   - component: {fileID: 1258144750}
-  - component: {fileID: 1258144749}
-  - component: {fileID: 1258144753}
   m_Layer: 0
   m_Name: InputAquaStone
   m_TagString: Untagged
@@ -28357,19 +28327,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1258144749
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258144747}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.03, z: 0.88}
-  m_Center: {x: -0.08, y: 1.35, z: 0.000000029802322}
 --- !u!23 &1258144750
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28436,19 +28393,6 @@ Transform:
   m_Father: {fileID: 1794871282}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1258144753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258144747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb53dc8d4e0c08459b461cc2fb7e25d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  getStone: 00000000
 --- !u!1 &1262573420
 GameObject:
   m_ObjectHideFlags: 0
@@ -36074,8 +36018,6 @@ GameObject:
   - component: {fileID: 1615217800}
   - component: {fileID: 1615217799}
   - component: {fileID: 1615217798}
-  - component: {fileID: 1615217797}
-  - component: {fileID: 1615217801}
   m_Layer: 0
   m_Name: 'InputYellowStone '
   m_TagString: Untagged
@@ -36083,19 +36025,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1615217797
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615217795}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.03, z: 0.88}
-  m_Center: {x: -0.08, y: 1.35, z: 0.000000029802322}
 --- !u!23 &1615217798
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36162,19 +36091,6 @@ Transform:
   m_Father: {fileID: 1794871282}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1615217801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615217795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb53dc8d4e0c08459b461cc2fb7e25d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  getStone: 00000000
 --- !u!1001 &1629301865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39695,6 +39611,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1794871282}
+  - component: {fileID: 1794871284}
+  - component: {fileID: 1794871283}
   m_Layer: 0
   m_Name: FinishInputStone
   m_TagString: Untagged
@@ -39721,6 +39639,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1794871283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794871281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb53dc8d4e0c08459b461cc2fb7e25d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  getStone: 00000000
+--- !u!65 &1794871284
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794871281}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 4.57}
+  m_Center: {x: 0.14, y: 0.47, z: 0}
 --- !u!1001 &1796341702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54229,8 +54173,6 @@ GameObject:
   - component: {fileID: 3181573785714106967}
   - component: {fileID: 3181573785712812663}
   - component: {fileID: 3181573785711681719}
-  - component: {fileID: 3181573785714106969}
-  - component: {fileID: 3181573785714106970}
   m_Layer: 0
   m_Name: InputRedStone
   m_TagString: Untagged
@@ -54254,32 +54196,6 @@ Transform:
   m_Father: {fileID: 1794871282}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3181573785714106969
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3181573785713688183}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.03, z: 0.88}
-  m_Center: {x: -0.08, y: 1.35, z: 0.000000029802322}
---- !u!114 &3181573785714106970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3181573785713688183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb53dc8d4e0c08459b461cc2fb7e25d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  getStone: 00000000
 --- !u!4 &3358071065038708192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8660585271137405669, guid: a481acdedee58d04aa1ddfe33e937ea7, type: 3}

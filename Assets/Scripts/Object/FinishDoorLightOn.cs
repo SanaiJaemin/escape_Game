@@ -6,7 +6,7 @@ public class FinishDoorLightOn : MonoBehaviour
 {
 
     private MeshRenderer _meshRenderer;
-   
+    public InputStone _inputStone;
    private GameObject[] Stone = new GameObject[4];
     // Start is called before the first frame update
     private void Awake()
@@ -31,9 +31,9 @@ public class FinishDoorLightOn : MonoBehaviour
 
             if (_inputStone.getStone[i] == true)
             {
-                
-                Stone[i].GetComponent<MeshRenderer>().material.color = Color.red;
-                Debug.Log("·¹µå½ºÅæ");
+
+                Stone[i].GetComponent<MeshRenderer>().material.color = Color.green;
+
             }
         }
     }

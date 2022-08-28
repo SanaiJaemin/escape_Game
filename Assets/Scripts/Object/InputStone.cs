@@ -16,7 +16,7 @@ public class InputStone : MonoBehaviour
         StoneTable.Add(0,"RedStone");
         StoneTable.Add(1,"YellowStone");
         StoneTable.Add(2,"BlueStone");
-        StoneTable.Add(3,"AquaStoneStone");
+        StoneTable.Add(3,"AquaMarineStone");
         for (int i = 0; i < 4; i++)
         {
             StoneInput[i] = transform.GetChild(i).gameObject;
