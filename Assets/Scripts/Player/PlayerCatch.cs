@@ -9,6 +9,9 @@ public class PlayerCatch : MonoBehaviour
 
     public GameObject GetObject;
     public GameObject WorldObject;
+    public GameObject KeyPad;
+    public PlayerCamera _playerCamera;
+   public bool UiObject = false;
 
 
     LayerMask WorldLayer;
@@ -19,7 +22,7 @@ public class PlayerCatch : MonoBehaviour
     {
         GetObject = GetComponent<GameObject>();
         WorldObject = GetComponent<GameObject>();
-
+        KeyPad.SetActive(false);
     }
 
     private void Start()
@@ -44,7 +47,13 @@ public class PlayerCatch : MonoBehaviour
         }
 
         UpdateInput(); // Å°ÀÔ·Â
-       
+
+
+        if (KeyPad.active == false)
+        {
+            UiObject = false;
+            Debug.Log($"{UiObject}");
+        }
     }
 
     private void UpdateInput()
@@ -87,6 +96,19 @@ public class PlayerCatch : MonoBehaviour
             if (hit.collider.CompareTag("Swich"))
             {
                 hit.transform.GetComponent<HideZoneSwich>().SwichOn = true;
+
+            }
+            if(hit.collider.CompareTag("Box"))
+            { 
+                hit.transform.GetComponent<Animator>().SetBool("Open", true);
+            }
+            if(hit.collider.CompareTag("KeyPad"))
+            {
+                UiObject = true;
+                KeyPad.SetActive(true);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+
 
             }
 

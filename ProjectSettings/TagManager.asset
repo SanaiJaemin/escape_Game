@@ -17,6 +17,8 @@ TagManager:
   - YellowStone
   - BlueStone
   - AquaMarineStone
+  - Box
+  - KeyPad
   layers:
   - Default
   - TransparentFX

@@ -19,7 +19,6 @@ public class Sensing : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        
     Raycasting();
     }
     
@@ -30,28 +29,19 @@ public class Sensing : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, distance))
         {
-            if (hit.collider.CompareTag("Item"))
+            void NameInfo(string name)
             {
-                Sensou.SetActive(true);
-                _textMeshProGUI.text = hit.transform.name;
+                if (hit.collider.CompareTag(name))
+                {
+                    Sensou.SetActive(true);
+                    _textMeshProGUI.text = $"[{hit.transform.name}]";
+                    
+                }
             }
-
-
-
-
-            if (hit.collider.CompareTag("Swich"))
-            {
-                Debug.Log("¾ÈµÊ");
-                Sensou.SetActive(true);
-                _textMeshProGUI.text = hit.transform.name;
-
-            }
-            
-              
-            
-
-
-
+            NameInfo("Item");
+            NameInfo("Swich");
+            NameInfo("Box");
+            NameInfo("KeyPad");
         }
         else
         {

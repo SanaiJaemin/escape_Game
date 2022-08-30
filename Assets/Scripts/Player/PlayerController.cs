@@ -20,7 +20,8 @@ public class PlayerController : MonoBehaviour
 
     private PlayerCamera _playerCamera;
    private PlayerMove _playerMove;
-    private PlayerCatch _playerCatch;
+    public PlayerCatch _playerCatch;
+    //public PlayerCatch _playerCatch;
     public bool isCatch = false;
 
  
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
         _playerCamera = GetComponent<PlayerCamera>();
         _playerMove = GetComponent<PlayerMove>();
         _audioSource = GetComponent<AudioSource>();
-        _playerCatch = GetComponent<PlayerCatch>();
+       
 
 
 
@@ -52,7 +53,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       if(!_playerCatch.UiObject)
+        {
+
         UpdateRotate();
+        }
         UpdateMove();
         UpdateJump();
         UpdateCatch();
@@ -64,7 +69,6 @@ public class PlayerController : MonoBehaviour
     {
         float MouseX = Input.GetAxis("Mouse X");
         float MouseY = Input.GetAxis("Mouse Y");
-
         _playerCamera.UpdateRotate(MouseX,MouseY);
     }
     private void UpdateMove()

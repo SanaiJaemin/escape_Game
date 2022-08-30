@@ -16,13 +16,18 @@ public class EnemyFSM : MonoBehaviour
 
     float randomPositionScend = 5f;
     float Delay;
-    LayerMask PlayLayer;
     NavMeshAgent _navMeshAgent;
 
     float range = 10f;
     Vector3 point;
     Vector3 Movevec;
 
+    LayerMask PlayLayer; //플레이어 넣을 레이어마스크공간
+    void Start()
+    {
+        PlayLayer = LayerMask.NameToLayer("Player"); //  플레이어찾아가게끔 레이어이름 넣어주기
+
+    }
 
     private void Awake()
     {
@@ -30,17 +35,11 @@ public class EnemyFSM : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
     }
-    void Start()
-    {
-        PlayLayer = LayerMask.NameToLayer("Player");
-
-    }
 
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        int layerMask = (1 << PlayLayer);
 
         RandomTarget(); // 랜덤타겟 패트롤
 
@@ -48,13 +47,13 @@ public class EnemyFSM : MonoBehaviour
         Vector3 Movevec = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         _animator.SetBool("Run", Movevec != Vector3.zero);
         transform.LookAt(TargetPos);
-        
-       
 
-        Collider[] colliders = Physics.OverlapSphere(this.transform.position, PlayerTargetRange, layerMask); // 타켓지정해주는것
-        foreach (Collider col in colliders)
+        int layerMask = (1 << PlayLayer); 
+        
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, PlayerTargetRange, layerMask);  
+        foreach (Collider col in colliders) // 
         {
-            if (col.name == "Enemy")
+            if (col.name == "Enemy") 
             {
                 continue;
             }
@@ -66,7 +65,7 @@ public class EnemyFSM : MonoBehaviour
 
         if (isTargetPlayer)
         {
-            float SensingRange = Vector3.Distance(transform.position, TargetPos.position);
+            float SensingRange = Vector3.Distance(transform.position, TargetPos.position); 
            
             _navMeshAgent.SetDestination(TargetPos.position);
 
@@ -75,7 +74,6 @@ public class EnemyFSM : MonoBehaviour
 
             }
 
-            // 플레이어 와 몬스터 거리가 공격범위가 5 이상이면 추격중지 하고 랜덤오브젝트 좌표로 타겟포지션 지정
             if (SensingRange > PlayerTargetRange)
             {
                 TargetPos = Randomobject.transform;
@@ -110,7 +108,7 @@ public class EnemyFSM : MonoBehaviour
     //    }
     //}
 
-    bool RandomPoint(Vector3 center, float range, out Vector3 result)
+    bool RandomPoint(Vector3 center, float range, out Vector3 result)  // 중심 , 범위 , 리턴결과값
     {
         for (int i = 0; i < 30; i++)
         {
@@ -140,15 +138,15 @@ public class EnemyFSM : MonoBehaviour
         {
           
             Delay = 0f;
-            if (RandomPoint(TargetPos.position, range, out point)) //랜덤 포지션
+            if (RandomPoint(TargetPos.position, range, out point)) 
             {
                 TargetPos.position = point;
 
 
             }
-            Debug.DrawRay(TargetPos.position, Vector3.up, Color.blue, 6f);
+            Debug.DrawRay(TargetPos.position, Vector3.up, Color.blue, 6f); 
             
-            _navMeshAgent.SetDestination(TargetPos.position); // 타겟따라가게하기
+            _navMeshAgent.SetDestination(TargetPos.position); 
            
         }
 

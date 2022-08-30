@@ -12,8 +12,8 @@ public class PlayerCamera : MonoBehaviour
 
     private float RotateMinX = -80;
     private float RotateMaxX = 50;
-    private float eulerAngleX;
-    private float eulerAngleY;
+    [HideInInspector] public float eulerAngleX;
+    [HideInInspector] public float eulerAngleY;
 
    
 
