@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
+    public void Continue()
+    {
+        gameObject.SetActive(false);
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     // Start is called before the first frame update
     void Start()
     {
