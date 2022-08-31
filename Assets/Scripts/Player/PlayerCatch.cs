@@ -10,7 +10,8 @@ public class PlayerCatch : MonoBehaviour
     public GameObject GetObject;
     public GameObject WorldObject;
     public GameObject KeyPad;
-    public PlayerCamera _playerCamera;
+    public GameObject Pause;
+   
    public bool UiObject = false;
 
 
@@ -23,6 +24,7 @@ public class PlayerCatch : MonoBehaviour
         GetObject = GetComponent<GameObject>();
         WorldObject = GetComponent<GameObject>();
         KeyPad.SetActive(false);
+        Pause.SetActive(false);
     }
 
     private void Start()
@@ -49,10 +51,10 @@ public class PlayerCatch : MonoBehaviour
         UpdateInput(); // Å°ÀÔ·Â
 
 
-        if (KeyPad.active == false)
+        if (!KeyPad.activeSelf && !Pause)
         {
             UiObject = false;
-            Debug.Log($"{UiObject}");
+            
         }
     }
 
@@ -108,7 +110,7 @@ public class PlayerCatch : MonoBehaviour
                 KeyPad.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-
+                Time.timeScale = 0f;
 
             }
 

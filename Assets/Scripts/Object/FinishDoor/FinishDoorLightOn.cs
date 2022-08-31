@@ -7,15 +7,15 @@ public class FinishDoorLightOn : MonoBehaviour
 
     private MeshRenderer _meshRenderer;
     public InputStone _inputStone;
-   private GameObject[] Stone = new GameObject[4];
-    public bool[] LightOn = new bool[4];
+   private GameObject[] Stone = new GameObject[3];
+    public bool[] LightOn = new bool[3];
     
     // Start is called before the first frame update
     private void Awake()
     {
 
 
-      for(int i = 0; i < 4; i++)
+      for(int i = 0; i < 3; i++)
         {
             Stone[i] = transform.GetChild(i).gameObject;
             LightOn[i] = false;
@@ -36,7 +36,7 @@ public class FinishDoorLightOn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
 
 

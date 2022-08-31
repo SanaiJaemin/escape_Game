@@ -7,9 +7,9 @@ public class InputStone : MonoBehaviour
 
 
     
-    public bool[] getStone = new bool[4];
+    public bool[] getStone = new bool[3];
     Dictionary<int,string> StoneTable = new Dictionary<int, string>();
-    private GameObject[] StoneInput = new GameObject[4];
+    private GameObject[] StoneInput = new GameObject[3];
     private AudioSource _audioSource;
     public AudioClip LightSound;
 
@@ -20,8 +20,8 @@ public class InputStone : MonoBehaviour
         StoneTable.Add(0,"RedStone");
         StoneTable.Add(1,"YellowStone");
         StoneTable.Add(2,"BlueStone");
-        StoneTable.Add(3,"AquaMarineStone");
-        for (int i = 0; i < 4; i++)
+       
+        for (int i = 0; i < 3; i++)
         {
             StoneInput[i] = transform.GetChild(i).gameObject;
         }
@@ -41,7 +41,7 @@ public class InputStone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        for(int i = 0; i < 4; i ++)
+        for(int i = 0; i < 3; i ++)
         {
             if (other.name == StoneTable[i])
             {

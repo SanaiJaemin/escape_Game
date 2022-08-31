@@ -38,10 +38,19 @@ public class Sensing : MonoBehaviour
                     
                 }
             }
+            void tagInfo(string name)
+            {
+                if (hit.collider.CompareTag(name))
+                {
+                    Sensou.SetActive(true);
+                    _textMeshProGUI.text = $"[{hit.transform.tag}]";
+
+                }
+            }
             NameInfo("Item");
-            NameInfo("Swich");
-            NameInfo("Box");
+            NameInfo("Swich"); 
             NameInfo("KeyPad");
+            tagInfo("Box");
         }
         else
         {

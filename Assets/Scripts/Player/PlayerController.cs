@@ -19,10 +19,12 @@ public class PlayerController : MonoBehaviour
     private AudioClip _audioClipRun;
 
     private PlayerCamera _playerCamera;
-   private PlayerMove _playerMove;
+    private PlayerMove _playerMove;
+    
     public PlayerCatch _playerCatch;
-    //public PlayerCatch _playerCatch;
     public bool isCatch = false;
+    public bool isPause = false;
+  
 
  
     
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour
         {
 
         UpdateRotate();
+        stop();
         }
         UpdateMove();
         UpdateJump();
@@ -89,9 +92,13 @@ public class PlayerController : MonoBehaviour
     private void UpdateCatch()
     {
         isCatch = Input.GetKeyDown(KeyCode.E);
-        
-            
-        
+
+    }
+
+    private void stop()
+    {
+        isPause = Input.GetKeyDown(KeyCode.Escape);
+
     }
 
  
