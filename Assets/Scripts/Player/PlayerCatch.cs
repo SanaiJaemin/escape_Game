@@ -51,7 +51,7 @@ public class PlayerCatch : MonoBehaviour
         UpdateInput(); // е╟ют╥б
 
 
-        if (!KeyPad.activeSelf && !Pause)
+        if (!KeyPad.activeSelf || !Pause)
         {
             UiObject = false;
             

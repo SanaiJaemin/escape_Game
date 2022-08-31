@@ -4,33 +4,47 @@ using UnityEngine;
 
 public class IsPlayer : MonoBehaviour
 {
-
-  public bool isInPlayer = false;
+    public FinishDoor _finishDoor;
+    public AudioClip DoorSound;
+   
+    [HideInInspector] public bool isInPlayer = false;
+    
+    private AudioSource _audioSource;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (_finishDoor.AllLightOn == true)
         {
-            isInPlayer = true;
+
+            if (other.CompareTag("Player"))
+            {
+                _audioSource.PlayOneShot(DoorSound);
+                isInPlayer = true;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (_finishDoor.AllLightOn == true)
         {
-            isInPlayer = false;
+
+            if (other.CompareTag("Player"))
+            {
+                _audioSource.PlayOneShot(DoorSound);
+                isInPlayer = false;
+            }
         }
     }
 

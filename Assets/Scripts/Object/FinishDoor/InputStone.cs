@@ -17,9 +17,9 @@ public class InputStone : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
 
-        StoneTable.Add(0,"RedStone");
-        StoneTable.Add(1,"YellowStone");
-        StoneTable.Add(2,"BlueStone");
+        StoneTable.Add(0,"RedStone (1)");
+        StoneTable.Add(1, "YellowStone (1)");
+        StoneTable.Add(2, "BlueStone (1)");
        
         for (int i = 0; i < 3; i++)
         {
@@ -56,7 +56,7 @@ public class InputStone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (other.name == StoneTable[i])
             {
