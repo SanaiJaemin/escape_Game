@@ -28,12 +28,12 @@ public class HideZone : MonoBehaviour
         if(DoorClose)
         {
             _Enemyfsm.isTargetPlayer = false;
-            _Enemyfsm.PlayerTargetRange = 1f;
+            _Enemyfsm.TargetRange = 1f;
 
         }
         else
         {
-            _Enemyfsm.PlayerTargetRange = 5f;
+            _Enemyfsm.TargetRange = 5f;
         }
     }
 

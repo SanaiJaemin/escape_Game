@@ -5,55 +5,134 @@ using UnityEngine.AI;
 
 public class EnemyFSM : MonoBehaviour
 {
+    public enum CurrentState { idle, Run, Attack };
+    public CurrentState curState = CurrentState.idle;
     private Animator _animator;
     public Transform TargetPos;
 
 
     public GameObject Randomobject;
     public bool isTargetPlayer = false;
-    public float PlayerTargetRange = 5f;
-
-
+    public float TargetRange = 5f;
+    public bool PlayerDie = false;
+    public float attackDistance = 2f;
     float randomPositionScend = 5f;
     float Delay;
     NavMeshAgent _navMeshAgent;
-
-    float range = 10f;
+    float range = 5f;
     Vector3 point;
-    Vector3 Movevec;
+
+    private AudioSource _audioSource;
+    public AudioClip WalkSound;
 
     LayerMask PlayLayer; //플레이어 넣을 레이어마스크공간
-    void Start()
-    {
-        PlayLayer = LayerMask.NameToLayer("Player"); //  플레이어찾아가게끔 레이어이름 넣어주기
-
-    }
-
     private void Awake()
     {
-
+        _audioSource = GetComponent<AudioSource>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
     }
+    void Start()
+    {
+        PlayLayer = LayerMask.NameToLayer("Player"); //  플레이어찾아가게끔 레이어이름 넣어주기
+        StartCoroutine(StateCheck());
+        StartCoroutine(CheckStateForAction());
+    }
 
 
+    IEnumerator StateCheck()
+    {
+        while (!PlayerDie)
+        {
+            RandomTarget(); //랜덤타켓 랜덤으로 포스 지정
+            TargetCollider(); // 플레이어감지
+            yield return new WaitForSeconds(0.2f);
+            float Dist = Vector3.Distance(transform.position, TargetPos.position);
+            if (Dist <= attackDistance && isTargetPlayer == true)
+            {
+                curState = CurrentState.Attack;
+            }
+            else if (Dist >= TargetRange && isTargetPlayer == true)
+            {
+
+                TargetPos = Randomobject.transform;
+                isTargetPlayer = false;
+                curState = CurrentState.Run;
+            }
+            else
+            {
+                curState = CurrentState.Run;
+            }
+
+
+
+        }
+    }
+
+    IEnumerator CheckStateForAction()
+    {
+        while (!PlayerDie)
+        {
+            float Dist = Vector3.Distance(transform.position, TargetPos.position);
+            switch (curState)
+            {
+
+                case CurrentState.idle:
+                    _navMeshAgent.isStopped = true;
+                    _navMeshAgent.velocity = Vector3.zero;
+                    _animator.SetBool("Run", false);
+                    yield return new WaitForSeconds(3f);
+                    break;
+
+                case CurrentState.Run:
+                    _navMeshAgent.isStopped = false;
+                    
+                    _animator.SetBool("Run", true);
+                    _navMeshAgent.SetDestination(TargetPos.position);
+                    if (!isTargetPlayer && Dist <= 0.5f)
+                    {
+                        curState = CurrentState.idle;
+                    }
+                    break;
+
+                case CurrentState.Attack:
+                    _navMeshAgent.isStopped = true;
+                    _animator.SetBool("Attack", true);
+                    yield return new WaitForSeconds(2.5f);
+                    if (isTargetPlayer)
+                    {
+                        curState = CurrentState.Run;
+                        _animator.SetTrigger("PrevRun");
+
+                    }
+                    if (Dist >= attackDistance)
+                    {
+                        curState = CurrentState.idle;
+
+                    }
+                    break;
+            }
+            yield return null;
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
+        RandomTarget();
+    }
 
-        RandomTarget(); // 랜덤타겟 패트롤
 
 
-        Vector3 Movevec = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        _animator.SetBool("Run", Movevec != Vector3.zero);
-        transform.LookAt(TargetPos);
 
-        int layerMask = (1 << PlayLayer); 
-        
-        Collider[] colliders = Physics.OverlapSphere(this.transform.position, PlayerTargetRange, layerMask);  
+
+    private void TargetCollider()
+    {
+        int layerMask = (1 << PlayLayer);
+
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, TargetRange, layerMask);
         foreach (Collider col in colliders) // 
         {
-            if (col.name == "Enemy") 
+            if (col.name == "Enemy")
             {
                 continue;
             }
@@ -62,52 +141,31 @@ public class EnemyFSM : MonoBehaviour
             TargetPos = col.transform;
             break;
         }
-
+    } //패트롤하다가 찾을려고만듬
+    public void RandomTarget()
+    {
+        Debug.Log($"{isTargetPlayer}");
         if (isTargetPlayer)
         {
-            float SensingRange = Vector3.Distance(transform.position, TargetPos.position); 
-           
+            return;
+        }
+        Delay += Time.deltaTime;
+        if (Delay > randomPositionScend)
+        {
+            Delay = 0f;
+            if (RandomPoint(TargetPos.position, range, out point))
+            {
+                TargetPos.position = point;
+
+
+            }
+            Debug.DrawRay(TargetPos.position, Vector3.up, Color.blue, 6f);
+
             _navMeshAgent.SetDestination(TargetPos.position);
 
-            if (SensingRange > 2f)
-            {
-
-            }
-
-            if (SensingRange > PlayerTargetRange)
-            {
-                TargetPos = Randomobject.transform;
-                _navMeshAgent.SetDestination(TargetPos.position);
-                isTargetPlayer = false;
-
-            }
         }
 
-
-        Debug.Log($"{PlayerTargetRange}");
     }
-
-
-    public float Speed = 2f;
-    public float attackDistance = 1.5f;
-    //float attackTime = 1f;
-    //private void Attack()
-    //{
-    //    _animator.SetTrigger("Attack");
-    //    Delay += Time.deltaTime;
-
-    //    if (Delay > attackTime)
-    //    {
-    //        Delay = 0f;
-
-    //        if (Delay >= attackDistance)
-    //        {
-
-    //            currentState = State.Walk;
-    //        }
-    //    }
-    //}
-
     bool RandomPoint(Vector3 center, float range, out Vector3 result)  // 중심 , 범위 , 리턴결과값
     {
         for (int i = 0; i < 30; i++)
@@ -125,40 +183,4 @@ public class EnemyFSM : MonoBehaviour
         result = Vector3.zero;
         return false;
     }
-
-    public void RandomTarget()
-    {
-        Debug.Log($"{isTargetPlayer}");
-        if (isTargetPlayer)
-        {
-            return;
-        }
-        Delay += Time.deltaTime;
-        if (Delay > randomPositionScend)
-        {
-          
-            Delay = 0f;
-            if (RandomPoint(TargetPos.position, range, out point)) 
-            {
-                TargetPos.position = point;
-
-
-            }
-            Debug.DrawRay(TargetPos.position, Vector3.up, Color.blue, 6f); 
-            
-            _navMeshAgent.SetDestination(TargetPos.position); 
-           
-        }
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-       if(other.CompareTag("RandomPos"))
-        {
-            _animator.SetTrigger("Idle");
-            Debug.Log("발동됨");
-        }
-    }
-
 }
