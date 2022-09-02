@@ -17,9 +17,9 @@ public class InputStone : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
 
-        StoneTable.Add(0,"RedStone (1)");
-        StoneTable.Add(1, "YellowStone (1)");
-        StoneTable.Add(2, "BlueStone (1)");
+        StoneTable.Add(0,"RedStone");
+        StoneTable.Add(1, "YellowStone");
+        StoneTable.Add(2, "BlueStone");
        
         for (int i = 0; i < 3; i++)
         {

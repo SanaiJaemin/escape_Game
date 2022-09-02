@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 public class CameraHit : MonoBehaviour
 {
 
-   
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +15,6 @@ public class CameraHit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
     }
 
     public void OnclickEnter()
@@ -28,6 +25,7 @@ public class CameraHit : MonoBehaviour
 
     public void OnClickExit()
     {
+        Application.Quit();
         Debug.Log("³ª°¡±â");
     }
    

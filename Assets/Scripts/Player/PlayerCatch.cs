@@ -103,6 +103,7 @@ public class PlayerCatch : MonoBehaviour
             if(hit.collider.CompareTag("Box"))
             { 
                 hit.transform.GetComponent<Animator>().SetBool("Open", true);
+                hit.transform.GetComponent<BoxCollider>().size = new Vector3(0.1f, 0.1f, 0.1f);
             }
             if(hit.collider.CompareTag("KeyPad"))
             {

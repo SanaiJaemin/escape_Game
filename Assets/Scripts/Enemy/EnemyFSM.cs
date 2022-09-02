@@ -86,7 +86,7 @@ public class EnemyFSM : MonoBehaviour
 
                 case CurrentState.Run:
                     _navMeshAgent.isStopped = false;
-                    
+                    transform.LookAt(TargetPos.position);
                     _animator.SetBool("Run", true);
                     _navMeshAgent.SetDestination(TargetPos.position);
                     if (!isTargetPlayer && Dist <= 0.5f)

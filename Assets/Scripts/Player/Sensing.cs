@@ -46,11 +46,15 @@ public class Sensing : MonoBehaviour
                     _textMeshProGUI.text = $"[{hit.transform.tag}]";
 
                 }
-            }
-            NameInfo("Item");
+            }  
             NameInfo("Swich"); 
             NameInfo("KeyPad");
             tagInfo("Box");
+            if(hit.collider.CompareTag("Item"))
+            {
+
+            }
+            
         }
         else
         {

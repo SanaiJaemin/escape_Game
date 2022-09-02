@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
@@ -26,5 +27,12 @@ public class Pause : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         GameManager._instance._playerController.isPause = false;
        
+    }
+
+    public void mainmenu()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
+        Destroy(GameManager._instance.gameObject);
     }
 }

@@ -8,67 +8,107 @@ public class NumberInput : MonoBehaviour
     public TextMeshProUGUI _textMeshProGUI;
     [HideInInspector] public bool Clear = false;
     public GameObject KeyPadUi;
-    private string ClearNumber = "7375";
+    private string ClearNumber = "7475";
+    private int MaxIndex = 4;
+    private int count = 0;
+    
     
     // Start is called before the first frame update
     void Start()
     {
         Clear = false;
-        _textMeshProGUI.text = null;
-        Cursor.visible = true;
         
+        Cursor.visible = true;
+       
+
     }
 
     // Update is called once per frame
     public void numpad0()
     {
+        if(count < MaxIndex)
+        {
         _textMeshProGUI.text += "0";
-
+        count++;
+        }
     }
     public void numpad1()
     {
-        _textMeshProGUI.text += "1";
-        
+        if (count < MaxIndex)
+        {
+            _textMeshProGUI.text += "1";
+            count++;
+        }
     }
     public void numpad2()
     {
-        _textMeshProGUI.text += "2";
-
+        if (count < MaxIndex)
+        {
+            _textMeshProGUI.text += "2";
+            count++;
+        }
     }
     public void numpad3()
     {
-        _textMeshProGUI.text += "3";
+        if (count < MaxIndex)
+        {
+            _textMeshProGUI.text += "3";
+            count++;
+        }
     }
     public void numpad4()
     {
-        _textMeshProGUI.text += "4";
-
+        if(count < MaxIndex)
+        {
+            _textMeshProGUI.text += "4";
+            count++;
+        }
     }
     public void numpad5()
     {
-        _textMeshProGUI.text += "5";
+        if (count < MaxIndex)
+        {
+            _textMeshProGUI.text += "5";
+            count++;
+        }
     }
     public void numpad6()
     {
-        _textMeshProGUI.text += "6";
-
+        if (count < MaxIndex)
+        {
+            _textMeshProGUI.text += "6";
+            count++;
+        }
     }
     public void numpad7()
     {
-        _textMeshProGUI.text += "7";
+        if (count < MaxIndex)
+        {
+            _textMeshProGUI.text += "7";
+            count++;
+        }
     }
     public void numpad8()
     {
-        _textMeshProGUI.text += "8";
-
+        if (count < MaxIndex)
+        {
+            _textMeshProGUI.text += "8";
+            count++;
+        }
     }
     public void numpad9()
     {
-        _textMeshProGUI.text += "9";
+        if (count < MaxIndex)
+        {
+            _textMeshProGUI.text += "9";
+            count++;
+        }
     }
     public void numEmpty()
     {
         _textMeshProGUI.text = null;
+        count = 0;
+
     }
     public void confirmation()
     {
@@ -83,10 +123,12 @@ public class NumberInput : MonoBehaviour
         {
             _textMeshProGUI.text = "Error";
             Clear = false;
+            count = 0;
         }
     }
     public void Exit()
     {
+        _textMeshProGUI.text = null;
         KeyPadUi.SetActive(false);
         Time.timeScale = 1;
         Cursor.visible = false;
