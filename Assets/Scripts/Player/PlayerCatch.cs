@@ -18,7 +18,7 @@ public class PlayerCatch : MonoBehaviour
     LayerMask WorldLayer;
 
     public bool catching = false;
-    private float distance = 5f;
+    private float distance = 3f;
     private void Awake()
     {
         GetObject = GetComponent<GameObject>();
@@ -128,6 +128,7 @@ public class PlayerCatch : MonoBehaviour
         // 큐/*브를 월드하위로 집어넣음 물건 놓기
         GetObject.GetComponent<Rigidbody>().useGravity = true;
         GetObject.GetComponent<Rigidbody>().isKinematic = false;
+        GetObject.GetComponent<Outline>().enabled = false;
         WorldObject.transform.DetachChildren();
         catching = false;
 

@@ -5,15 +5,18 @@ using TMPro;
 
 public class Sensing : MonoBehaviour
 {
-    private float distance = 5f;
+    private float distance = 3f;
+    
     public GameObject Sensou;
-   
     public TextMeshProUGUI _textMeshProGUI;
     // Start is called before the first frame update
+    private void Awake()
+    {
+      
+    }
     void Start()
     {
         Sensou.SetActive(false);
-        
     }
 
     // Update is called once per frame
@@ -21,6 +24,7 @@ public class Sensing : MonoBehaviour
     {
     Raycasting();
     }
+
     
 
     void Raycasting()
@@ -29,6 +33,9 @@ public class Sensing : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, distance))
         {
+           
+            
+
             void NameInfo(string name)
             {
                 if (hit.collider.CompareTag(name))
@@ -44,6 +51,7 @@ public class Sensing : MonoBehaviour
                 {
                     Sensou.SetActive(true);
                     _textMeshProGUI.text = $"[{hit.transform.tag}]";
+                    
 
                 }
             }  
@@ -52,14 +60,19 @@ public class Sensing : MonoBehaviour
             tagInfo("Box");
             if(hit.collider.CompareTag("Item"))
             {
+                Sensou.SetActive(true);
+                _textMeshProGUI.text = $"[{hit.transform.name}]";
+
+                hit.transform.gameObject.GetComponent<Outline>().enabled = true;
 
             }
-            
+           
+
         }
         else
         {
             Sensou.SetActive(false);
-            
+
         }
 
     }
